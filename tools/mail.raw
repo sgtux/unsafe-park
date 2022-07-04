@@ -1,0 +1,11 @@
+ehlo vuln.lab
+MAIL FROM: atacante@vuln.lab
+RCPT TO: vitima@vuln.lab
+DATA
+From: atacante@vuln.lab
+To: vitima@vuln.lab
+Subject: Testing one two three
+This is only a test. Please do not panic. If this works, then all is well, else all is not well.
+In closing, Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+.
+quit

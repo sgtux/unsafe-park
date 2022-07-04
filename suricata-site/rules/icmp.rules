@@ -1,0 +1,1 @@
+alert icmp any any -> $HOME_NET any (msg:"ICMP Detected"; sid:1000001; rev:3; classtype:icmp-event; priority:3;)

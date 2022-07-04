@@ -1,0 +1,85 @@
+version: '2.2'
+
+services:
+
+  evebox:
+    build: ./evebox
+    networks:
+      lan:
+        ipv4_address: 172.22.22.10
+    ports:
+      - 80:80
+    volumes:
+      - ./evebox/files/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - ./evebox/files/init.sh:/root/init.sh
+      - ./evebox/files/evebox.yaml:/etc/evebox/evebox.yaml
+      - ./shared/eve.json:/var/log/suricata/eve.json
+
+  mail:
+    build: ./webmail
+    environment:
+      - TZ='America/Sao_Paulo'
+      - DOMAIN=vuln.lab
+      - THEME_INDEX=42
+      - APP_NAME=Squirrel Mail
+      - USER_TYPE=1
+      - EMAIL_GATEWAY=internet.lab|smtp:172.20.20.50
+    networks:
+      lan:
+        ipv4_address: 172.22.22.20
+
+  dvwa:
+    build: ./dvwa
+    networks:
+      lan:
+        ipv4_address: 172.22.22.30
+    volumes:
+      - ./shared/hosts:/etc/hosts
+
+  storage:
+    build: ./storage
+    networks:
+      lan:
+        ipv4_address: 172.22.22.40
+    volumes:
+      - ./storage/files/images/:/app/images
+
+  site:
+    build: ./suricata-site
+    depends_on:
+      - site_database
+    environment:
+      - DATABASE_CONNECTION_STRING=Host=172.22.22.200;Port=5432;Pooling=true;User Id=postgres;Password=Postgres123
+      - ASPNETCORE_ENVIRONMENT=Development 
+      - COOKIE_EXPIRES_IN_MINUTES=30
+      - JWT_KEY=utohWai7Iefa2loo7aeYeCo3HeWahpoKi5
+      # - CSP_HTTP_HEADER=img-src 'http://localhost:5000/'; report-uri /cspreport
+    # image: sgtux/netcorewebgoat
+    networks:
+      lan:
+        ipv4_address: 172.22.22.50
+    volumes:
+      - ./shared/eve.json:/var/log/suricata/eve.json
+      - ./suricata-site/suricata.yaml:/etc/suricata/suricata.yaml
+      - ./suricata-site/rules:/etc/suricata/rules
+
+  site_database:
+    environment:
+      - POSTGRES_PASSWORD=Postgres123
+    image: postgres
+    networks:
+      lan:
+        ipv4_address: 172.22.22.200
+
+  ftp:
+    build: ./ftp
+    networks:
+      lan:
+        ipv4_address: 172.22.22.60
+
+networks:
+  lan:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.22.22.0/24

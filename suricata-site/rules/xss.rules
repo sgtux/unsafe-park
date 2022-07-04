@@ -1,0 +1,9 @@
+alert tcp any any -> any 80 (msg: "Tag 'script' Cross Site Script (XSS) Detected"; content: "%3Cscript" ; nocase; sid:100000081; priority: 1;)
+alert tcp any any -> any 443 (msg: "Tag 'script' Cross Site Script (XSS) Detected"; content: "%3Cscript" ; nocase; sid:100000082; priority: 1;)
+alert tcp any any -> any 80 (msg: "Tag 'script' Cross Site Script (XSS) Detected"; content: "<script" ; nocase; sid:100000083; priority: 1;)
+alert tcp any any -> any 443 (msg: "Tag 'script' Cross Site Script (XSS) Detected"; content: "<script" ; nocase; sid:100000084; priority: 1;)
+
+alert tcp any any -> any 80 (msg: "Tag 'img' Cross Site Script (XSS) Detected"; content: "%3Cimg" ; nocase; sid:100000085; priority: 1;)
+alert tcp any any -> any 443 (msg: "Tag 'img' Cross Site Script (XSS) Detected"; content: "%3Cimg" ; nocase; sid:100000086; priority: 1;)
+alert tcp any any -> any 80 (msg: "Tag 'img' Cross Site Script (XSS) Detected"; content: "<img" ; nocase; sid:100000087; priority: 1;)
+alert tcp any any -> any 443 (msg: "Tag 'img' Cross Site Script (XSS) Detected"; content: "<img" ; nocase; sid:100000088; priority: 1;)

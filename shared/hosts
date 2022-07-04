@@ -1,0 +1,8 @@
+127.0.0.1       localhost
+::1             localhost ip6-localhost ip6-loopback
+
+172.22.22.20    mail.vuln.lab
+172.22.22.30    dvwa.vuln.lab
+172.22.22.40    storage.vuln.lab
+172.22.22.50    blog.vuln.lab
+172.22.22.60    ftp.vuln.lab
