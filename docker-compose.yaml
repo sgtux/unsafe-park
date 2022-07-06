@@ -13,6 +13,7 @@ services:
       - ./evebox/files/000-default.conf:/etc/apache2/sites-available/000-default.conf
       - ./evebox/files/init.sh:/root/init.sh
       - ./evebox/files/evebox.yaml:/etc/evebox/evebox.yaml
+      - ./evebox/files/index.html:/var/www/html/index.html
       - ./shared/eve.json:/var/log/suricata/eve.json
 
   mail:
