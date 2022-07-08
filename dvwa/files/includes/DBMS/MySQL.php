@@ -37,7 +37,8 @@ $baseUrl  = substr( $baseUrl, 0, $stripPos ).'hackable/users/';
 $insert = "INSERT INTO users VALUES
 	('1','admin','admin','admin',MD5('password'),'{$baseUrl}admin.jpg', NOW(), '0'),
 	('2','Vitima','Vitima','vitima',MD5('vitima'),'{$baseUrl}gordonb.jpg', NOW(), '0'),
-	('3','Atacante','Atacante','atacante',MD5('atacante'),'{$baseUrl}1337.jpg', NOW(), '0');";
+	('3','Atacante','Atacante','atacante',MD5('atacante'),'{$baseUrl}1337.jpg', NOW(), '0'),
+	('4','AppSec','AppSec','appsec',MD5('4pp2Ecs077'),'{$baseUrl}1337.jpg', NOW(), '0');";
 if( !mysql_query( $insert ) ) {
 	dvwaMessagePush( "Data could not be inserted into 'users' table<br />SQL: ".mysql_error() );
 	dvwaPageReload();

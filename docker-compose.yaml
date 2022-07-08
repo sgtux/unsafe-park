@@ -77,6 +77,16 @@ services:
     networks:
       lan:
         ipv4_address: 172.22.22.60
+  
+  juiceshop:
+    build: ./juiceshop
+    networks:
+      lan:
+        ipv4_address: 172.22.22.70
+    volumes:
+      - ./juiceshop/ports.conf:/etc/apache2/ports.conf
+      - ./juiceshop/html:/var/www/html/
+      - ./shared/hosts:/etc/hosts
 
 networks:
   lan:
